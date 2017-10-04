@@ -1,5 +1,5 @@
 import React from 'react';
-import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
+import {reduxForm, Field, focus} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty, email} from '../validators';
 import './app.css';
