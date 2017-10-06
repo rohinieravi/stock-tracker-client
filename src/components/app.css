@@ -7,7 +7,7 @@ body {
   sans-serif;
   font-size: 20px;
   color: #444;
-  background-color: #bbb; 
+   
   line-height: 1.5;
   text-align: center;
 }
@@ -47,7 +47,7 @@ section header {
   padding: 45px 15px;
 }
 
-section {
+.landing section {
   min-height: 200px;
   padding: 30px 15px;
   background-color: #bbb;
@@ -67,7 +67,7 @@ p + p {
   margin-top: 15px;
 }
 
-.landing {
+.landing, .icon {
   margin-top: 50px;
 }
 
@@ -91,3 +91,14 @@ label, input {
     padding: 2px;
     display: inline-block;
 }
+
+li {
+  min-height: 200px;
+  padding: 30px 15px;
+  background-color: #bbb;
+}
+
+li:nth-child(even) {
+  background-color: #ddd;
+}
+
