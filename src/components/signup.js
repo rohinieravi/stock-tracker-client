@@ -1,8 +1,9 @@
 import React from 'react';
-import {reduxForm, Field, focus} from 'redux-form';
+import {reduxForm, Field,focus} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty, email} from '../validators';
 import './app.css';
+
 
 export class SignUpForm extends React.Component {
 	onSubmit(values) {
@@ -20,19 +21,19 @@ export class SignUpForm extends React.Component {
 
 		return (
 			
-		        <form class='signup-form' onSubmit={this.props.handleSubmit(values =>
+		        <form className='signup-form' onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values))}>
                     
                 	{errorMessage}
                 	<Field
-	                    name="name"
+	                    name="fname"
 	                    type="text"
 	                    component={Input}
 	                    label="First Name"
 	                    validate={[required, nonEmpty]}
                 	/>
                 	<Field
-	                    name="name"
+	                    name="lname"
 	                    type="text"
 	                    component={Input}
 	                    label="Last Name"
