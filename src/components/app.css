@@ -31,7 +31,7 @@ nav {
   text-align: left;
 }
 
-nav a {
+a {
   text-decoration: none;
 }
 
@@ -92,13 +92,16 @@ label, input {
     display: inline-block;
 }
 
-li {
+.home li {
   min-height: 200px;
   padding: 30px 15px;
   background-color: #bbb;
 }
 
-li:nth-child(even) {
+.home li:nth-child(even) {
   background-color: #ddd;
 }
 
+section:nth-child(1) {
+  margin-top: 50px;
+}

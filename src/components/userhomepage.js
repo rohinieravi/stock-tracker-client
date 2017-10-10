@@ -7,8 +7,10 @@ import './app.css';
 export class HomePage extends React.Component {
 
 	render() {
-		const companies = this.props.companies.map((company, index) =>
-			<Company key={index} index={index} {...company} /> 
+		const companies = this.props.companies.map((company, index) => {
+			const symbol = Object.keys(company)[0];
+			return (<Company key={index} index={index} symbol={symbol}  {...company[symbol]} />); 
+		}
 		);
 		return (
 			<div className="home">
