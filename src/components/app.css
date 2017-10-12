@@ -105,3 +105,8 @@ label, input {
 section:nth-child(1) {
   margin-top: 50px;
 }
+
+.search-results li {
+  background-color: lightgrey;
+  margin:5px 0;
+}

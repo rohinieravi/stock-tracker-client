@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {searchCompany} from '../actions';
+import {searchCompany, clearOptions} from '../actions';
 
 export class Search extends React.Component {
   /*constructor(props){
@@ -37,6 +37,9 @@ export class Search extends React.Component {
       const name = this.input.value.trim();
       if(name) {
         this.props.dispatch(searchCompany(name));
+      }
+      else{
+      	this.props.dispatch(clearOptions());
       }
     }
 
