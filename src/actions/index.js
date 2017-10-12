@@ -18,7 +18,23 @@ export const searchCompany = (name) => ({
 	name
 });
 
+export const CLEAR_OPTIONS = 'CLEAR_OPTIONS';
+export const clearOptions = () => ({
+	type: CLEAR_OPTIONS
+})
+
 export const CHANGE_LOGIN_STATUS = 'CHANGE_LOGIN_STATUS'
 export const changeLoginStatus = () => ({
 	type: CHANGE_LOGIN_STATUS
+});
+
+export const DELETE_COMPANY = 'DELETE_COMPANY';
+export const deleteCompany = (symbol) => ({
+	type: DELETE_COMPANY,
+	symbol
+});
+
+export const CHANGE_INFOMODAL = 'CHANGE_INFOMODAL';
+export const changeInfoModal = () => ({
+    type: CHANGE_INFOMODAL
 });

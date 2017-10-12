@@ -1,13 +1,19 @@
 import React from 'react';
-import {reduxForm, Field,focus} from 'redux-form';
+import {reduxForm, Field, focus} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty, email} from '../validators';
+//import {changeLoginStatus} from '../actions';
 import './app.css';
 
 
 export class SignUpForm extends React.Component {
-	onSubmit(values) {
+	onSubmit(event) {
+		event.preventDefault();
+
+		/*this.props.dispatch(changeLoginStatus());
 		
+		this.props.history.push('/userhome');*/
+		alert("Sign up feature to be added soon. Login as demo user for testing.");
 	}
 
 	render() {
@@ -21,8 +27,7 @@ export class SignUpForm extends React.Component {
 
 		return (
 			
-		        <form className='signup-form' onSubmit={this.props.handleSubmit(values =>
-                    this.onSubmit(values))}>
+		        <form className='signup-form' onSubmit={e=>this.onSubmit(e)}>
                     
                 	{errorMessage}
                 	<Field

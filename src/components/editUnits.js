@@ -3,6 +3,8 @@ import './app.css';
 import Units from './units';
 import {connect} from 'react-redux';
 import {updateUnits} from '../actions';
+import {Link} from 'react-router-dom';
+
 
 export class EditUnits extends React.Component {
 	
@@ -28,6 +30,7 @@ export class EditUnits extends React.Component {
 	        			<div>{company[symbol].name}</div>
 						<Units quantity={company[symbol].units} onAdd={input => this.noOfUnits = input} />
 						<button>Save</button>
+						<button><Link to="/userhome">Cancel</Link></button>	
 					</form>	
 				</section>		
 			</div>

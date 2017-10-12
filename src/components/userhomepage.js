@@ -4,20 +4,37 @@ import {Link} from 'react-router-dom';
 import Company from './company';
 import './app.css';
 
+
+
 export class HomePage extends React.Component {
 
+	setComment(comment){
+		this.div.innerHTML = comment;
+	}
+	
 	render() {
+
+
 		const companies = this.props.companies.map((company, index) => {
 			const symbol = Object.keys(company)[0];
-			return (<Company key={index} index={index} symbol={symbol}  {...company[symbol]} />); 
+			return (
+				<Company key={index} index={index} symbol={symbol} onDelete={companyName => this.setComment(`Deleted ${companyName}`)}  {...company[symbol]} />
+			); 
+
 		}
 		);
+		if(companies.length === 0) {
+			this.setComment("No companies added.");
+		}
+		
+
 		return (
 			<div className="home">
 				<section>
         			<header>
           				<h3>My Stocks</h3>
         			</header>
+        			<div className="comments" ref={div => this.div=div}></div>
         			<ul>
         			{companies}
         			</ul>
@@ -29,7 +46,7 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    companies: state.stock.companies
+    companies: state.stock.companies,
 });
 
 export default connect(mapStateToProps)(HomePage);
