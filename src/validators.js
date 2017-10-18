@@ -10,3 +10,15 @@ export const nonEmpty = value =>
 // $ Matches the end of the text
 export const email = value =>
     /^\S+@\S+$/.test(value) ? undefined : 'Must be a valid email address';
+export const isTrimmed = value =>
+    value.trim() === value ? undefined : 'Cannot start or end with whitespace';
+export const length = length => value => {
+    if (length.min && value.length < length.min) {
+    	console.log('here 1');
+        return `Must be at least ${length.min} characters long`;
+    }
+    if (length.max && value.length > length.max) {
+    	    	console.log('here 2');
+        return `Must be at most ${length.max} characters long`;
+    }
+};

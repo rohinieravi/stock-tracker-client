@@ -1,4 +1,8 @@
 import * as actions from '../actions';
+import {SET_AUTH_TOKEN, SET_CURRENT_USER} from '../actions/auth';
+import {clearAuthToken} from '../local-storage';
+
+
 
 const initialState = {
 	companies: [{
@@ -32,7 +36,9 @@ const initialState = {
 		}
 	}],
 	loggedIn: false,
-	showInfoModal:false
+	showInfoModal:false,
+	authToken: null, // authToken !== null does not mean it has been validated
+    currentUser: null
 	
 };
 
@@ -70,15 +76,27 @@ export const stockReducer = (state=initialState, action) => {
 	}
 	else if(action.type === actions.DELETE_COMPANY) {
 		let companies = state.companies.filter(company => Object.keys(company)[0] !== action.symbol);
-		console.log(companies);
 		return Object.assign({}, state, {companies});
 	}
 	else if(action.type === actions.CHANGE_LOGIN_STATUS) {
-		return Object.assign({}, state,{loggedIn: !state.loggedIn});
+		clearAuthToken(state.authToken);
+		return Object.assign({}, state, {
+			authToken: null,
+			currentUser: null
+		});
 	}
 	else if (action.type === actions.CHANGE_INFOMODAL) {
         return Object.assign({}, state, {
             showInfoModal: !state.showInfoModal
+        });
+    }
+    if (action.type === SET_AUTH_TOKEN) {
+        return Object.assign({}, state, {
+            authToken: action.authToken
+        });
+    } else if (action.type === SET_CURRENT_USER) {
+        return Object.assign({}, state, {
+            currentUser: action.currentUser
         });
     }
 	return state;

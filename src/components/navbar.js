@@ -23,8 +23,8 @@ export function Navbar(props) {
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	return state.stock;
+const mapStateToProps = (state, props) => ({
+    loggedIn: state.stock.currentUser !== null
 
-}
+})
 export default connect(mapStateToProps)(Navbar);
