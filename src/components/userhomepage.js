@@ -8,6 +8,14 @@ import './app.css';
 
 export class HomePage extends React.Component {
 
+
+	componentDidMount() {
+		if(this.props.companies.length === 0){
+	        this.setComment("No companies added.");
+	    }	
+		
+    }
+
 	setComment(comment){
 		this.div.innerHTML = comment;
 	}
@@ -24,7 +32,7 @@ export class HomePage extends React.Component {
 		}
 		);
 		if(companies.length === 0) {
-			this.setComment("No companies added.");
+			//this.setComment("No companies added.");
 		}
 		
 
@@ -46,7 +54,7 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    companies: state.stock.companies,
+    companies: state.stock.currentUser.stocks,
 });
 
 export default connect(mapStateToProps)(HomePage);

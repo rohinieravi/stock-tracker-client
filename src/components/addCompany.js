@@ -7,6 +7,9 @@ import {connect} from 'react-redux';
 
 
 export class AddCompany extends React.Component {
+
+	
+
 	addComp(event) {
 		event.preventDefault();
 

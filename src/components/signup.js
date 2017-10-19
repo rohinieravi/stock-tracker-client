@@ -11,9 +11,9 @@ import './app.css';
 
 export class SignUpForm extends React.Component {
 	onSubmit(values) {
-        const {email, password, fname, lname} = values;
+        const {username, password, fname, lname} = values;
         const newUser = {
-        	username: email, 
+        	username, 
         	password, 
         	user: {
         		firstName: fname, 
@@ -22,7 +22,7 @@ export class SignUpForm extends React.Component {
         };
         return this.props
             .dispatch(registerUser(newUser))
-            .then(() => this.props.dispatch(login(email, password)));
+            .then(() => this.props.dispatch(login(username, password)));
     }
 	/*onSubmit(event) {
 		event.preventDefault();
@@ -64,7 +64,7 @@ export class SignUpForm extends React.Component {
 	                    validate={[required, nonEmpty]}
 	                />
 	                <Field
-	                    name="email"
+	                    name="username"
 	                    type="email"
 	                    component={Input}
 	                    label="Email"
@@ -90,6 +90,6 @@ export class SignUpForm extends React.Component {
 
 export default reduxForm({
     form: 'signup',
-    onSubmitFail: (errors, dispatch) =>
+    onSubmitFail: (errors, dispatch) => 
         dispatch(focus('signup', Object.keys(errors)[0]))
 })(SignUpForm);

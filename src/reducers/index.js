@@ -38,23 +38,22 @@ const initialState = {
 	loggedIn: false,
 	showInfoModal:false,
 	authToken: null, // authToken !== null does not mean it has been validated
-    currentUser: null
+    currentUser: null,
+    error: null
 	
 };
 
 export const stockReducer = (state=initialState, action) => {
-	if(action.type === actions.ADD_COMPANY) {
-		const newCompany = {};
-
-		newCompany[action.symbol]= {
-			name: state.allCompanies.filter(company => Object.keys(company)[0] === action.symbol)[0][action.symbol].name,
-			price: 1234,
-			change: "0.00",
-			units: action.units,
-		};
-		console.log(newCompany);
+	if(action.type === actions.ADD_COMPANY_SUCCESS) {
+		
 		return Object.assign({}, state, {
-			companies: [...state.companies,newCompany]
+			currentUser: action.data
+		});
+	}
+	else if(action.type === actions.ADD_COMPANY_ERROR) {
+		
+		return Object.assign({}, state, {
+			error: action.error
 		});
 	}
 	else if(action.type === actions.UPDATE_UNITS) {

@@ -24,7 +24,7 @@ export class Login extends React.Component {
 	onSubmit(values) {
         return this.props
         .dispatch(login(values.username, values.password))
-        .then(() => this.props.history.push('/userhome'));
+        .then(() =>  this.props.history.push('/userhome'));
     }
 
 	render() {
