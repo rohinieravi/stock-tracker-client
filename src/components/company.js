@@ -41,13 +41,13 @@ export class Company extends React.Component {
   		<li>
         {this.renderInfoModal()}
   			<header>
-          <h4>{this.props.name}</h4>
+          <h4>{this.props.stockInfo.description}</h4>
         </header>
         <div>Symbol: {this.props.symbol}</div>
-        <div>Current price: {`$${this.props.price}`}</div>
-        <div>Growth/Decline: {this.props.change}</div>
+        <div>Current price: {`$${this.props.stockInfo.last}`}</div>
+        <div>Growth/Decline: {this.props.stockInfo.change}</div>
         <div>Number of Units: {this.props.units}</div>
-        <div>Total Value: {`$${this.props.price*this.props.units}`}</div>
+        <div>Total Value: {`$${this.props.stockInfo.price*this.props.units}`}</div>
         <button><Link to={`/editUnits/${this.props.symbol}`}>Edit</Link></button>
         <button onClick={e => {e.preventDefault(); this.toggleInfoModal(this.props.symbol)}}>Delete</button>
   		</li>

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Company from './company';
+import {fetchStockInfo} from '../actions';
 import './app.css';
 
 
@@ -9,11 +10,22 @@ import './app.css';
 export class HomePage extends React.Component {
 
 
-	componentDidMount() {
-		if(this.props.companies.length === 0){
+	/*componentWillMount() {
+		
+	    this.props.dispatch(fetchStockInfo());
+	    setTimeout(()=>{}, 50000);
+	    
+		
+    }*/
+    constructor(props) {
+    	super(props);
+	    this.props.dispatch(fetchStockInfo());
+    }
+    
+    componentDidMount(){
+    	if(this.props.companies.length === 0){
 	        this.setComment("No companies added.");
 	    }	
-		
     }
 
 	setComment(comment){
@@ -24,9 +36,10 @@ export class HomePage extends React.Component {
 
 
 		const companies = this.props.companies.map((company, index) => {
-			const symbol = Object.keys(company)[0];
+			const stockinfo = this.props.stocks.find(stock => stock.symbol === company.symbol);
+			console.log(stockinfo);
 			return (
-				<Company key={index} index={index} symbol={symbol} onDelete={companyName => this.setComment(`Deleted ${companyName}`)}  {...company[symbol]} />
+				<Company key={index} index={index} stockInfo={stockinfo} onDelete={companyName => this.setComment(`Deleted ${companyName}`)}  {...company} />
 			); 
 
 		}
@@ -54,7 +67,8 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    companies: state.stock.currentUser.stocks,
+    stocks: state.stock.companies,
+    companies: state.stock.currentUser.stocks
 });
 
 export default connect(mapStateToProps)(HomePage);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {deleteCompany} from '../actions';
+import {deleteCompany, changeInfoModal} from '../actions';
 import {connect} from 'react-redux';
 
 
@@ -17,6 +17,7 @@ export class InfoModal extends React.Component {
     onDelete(event){
         event.preventDefault();
         this.props.dispatch(deleteCompany(this.props.company.symbol));
+        this.props.dispatch(changeInfoModal());
         if (this.props.onDelete) {
             this.props.onDelete();
         }

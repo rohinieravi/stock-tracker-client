@@ -5,22 +5,7 @@ import {clearAuthToken} from '../local-storage';
 
 
 const initialState = {
-	companies: [{
-		"AMZ":{
-		name: "Amazon Inc.",
-		price: 961.35,
-		change: "+5.00",
-		units: 10,
-	}
-	},
-	{
-		"MSFT":{
-		name: "Microsoft",
-		price: 74.49,
-		change: "-3.00",
-		units: 20,
-	}
-	}],
+	companies: [],
 	options:[],
 	allCompanies: [{
 		"TSLA": {
@@ -45,7 +30,7 @@ const initialState = {
 
 export const stockReducer = (state=initialState, action) => {
 	if(action.type === actions.ADD_COMPANY_SUCCESS) {
-		
+		console.log(action.data);
 		return Object.assign({}, state, {
 			currentUser: action.data
 		});
@@ -56,7 +41,41 @@ export const stockReducer = (state=initialState, action) => {
 			error: action.error
 		});
 	}
-	else if(action.type === actions.UPDATE_UNITS) {
+	else if(action.type === actions.DELETE_COMPANY_SUCCESS) {
+		console.log("in reducer");
+		const stocks = state.currentUser.stocks.filter(stock => stock.symbol !== action.symbol);
+		const currentUser = Object.assign({},state.currentUser,{stocks});
+		const companies = state.companies.filter(stock =>  stock.symbol !== action.symbol);
+		console.log(currentUser);
+		console.log(companies);
+		return Object.assign({}, state, {
+			currentUser,
+			companies
+		});
+	}
+	else if(action.type === actions.DELETE_COMPANY_ERROR) {
+		
+		return Object.assign({}, state, {
+			error: action.error
+		});
+	}
+	else if(action.type === actions.UPDATE_UNITS_SUCCESS) {
+		const stocks = state.currentUser.stocks.filter(stock => stock.symbol !== action.symbol);
+		const updatedStock = state.currentUser.stocks.find(stock=>stock.symbol === action.symbol );
+		updatedStock.units = action.units;
+		const currentUser = Object.assign({},state.currentUser,{stocks: [...stocks, updatedStock]});
+		console.log(currentUser);
+		return Object.assign({}, state, {
+			currentUser
+		});
+	}
+	else if(action.type === actions.UPDATE_UNITS_ERROR) {
+		
+		return Object.assign({}, state, {
+			error: action.error
+		});
+	}
+	/*else if(action.type === actions.UPDATE_UNITS) {
 		let updatedCompany = state.companies.filter(company => Object.keys(company)[0] === action.symbol)[0];
 		updatedCompany[action.symbol].units = action.units;
 		return Object.assign({},state, {
@@ -64,7 +83,7 @@ export const stockReducer = (state=initialState, action) => {
 				company[Object.keys(company)[0]] === action.symbol?updatedCompany:company
 			)
 		})
-	}
+	}*/
 	else if(action.type === actions.SEARCH_COMPANY) {
 		let options = state.allCompanies;
 		return Object.assign({}, state, {options});
@@ -73,10 +92,10 @@ export const stockReducer = (state=initialState, action) => {
 		let options = [];
 		return Object.assign({}, state, {options});
 	}
-	else if(action.type === actions.DELETE_COMPANY) {
+	/*else if(action.type === actions.DELETE_COMPANY) {
 		let companies = state.companies.filter(company => Object.keys(company)[0] !== action.symbol);
 		return Object.assign({}, state, {companies});
-	}
+	}*/
 	else if(action.type === actions.CHANGE_LOGIN_STATUS) {
 		clearAuthToken(state.authToken);
 		return Object.assign({}, state, {
@@ -98,5 +117,19 @@ export const stockReducer = (state=initialState, action) => {
             currentUser: action.currentUser
         });
     }
+    else if(action.type === actions.FETCH_STOCKINFO_SUCCESS) {
+    	console.log(action.data);
+    	const quote = action.data.quotes.quote;
+    	
+		return Object.assign({}, state, {
+			companies: quote
+		});
+	}
+	else if(action.type === actions.FETCH_STOCKINFO_ERROR) {
+		
+		return Object.assign({}, state, {
+			error: action.error
+		});
+	}
 	return state;
 };
