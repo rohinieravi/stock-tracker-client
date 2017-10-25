@@ -92,13 +92,13 @@ label, input {
     display: inline-block;
 }
 
-.home li {
+.companies li {
   min-height: 200px;
   padding: 30px 15px;
   background-color: #bbb;
 }
 
-.home li:nth-child(even) {
+.companies li:nth-child(even) {
   background-color: #ddd;
 }
 
@@ -109,4 +109,9 @@ section:nth-child(1) {
 .search-results li {
   background-color: lightgrey;
   margin:5px 0;
+}
+
+.addCompany {
+  border: 1px solid black;
+  padding: 10px;
 }

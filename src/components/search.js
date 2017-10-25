@@ -11,9 +11,8 @@ export class Search extends React.Component {
     renderResults() {
 
     	
-        
 	        const results = this.props.options.map((option, index) => 
-	        	<li key={index} onClick={e => this.onClick(e,option)} ><a href="">{Object.values(option)[0].name}</a></li>
+	        	<li key={index} onClick={e => this.onClick(e,option)} ><a href="">{option.description}</a></li>
 	        );
 
 	        return (
@@ -28,8 +27,9 @@ export class Search extends React.Component {
     onClick(event, option) {
     	event.preventDefault();
     	this.list.remove();
-    	this.input.value = Object.values(option)[0].name;
-    	this.props.onAdd(Object.keys(option)[0]);
+      this.props.dispatch(clearOptions());
+    	this.input.value = option.description;
+    	this.props.onAdd(option.symbol);
     }
   
     onChange(event) {

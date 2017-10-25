@@ -10,6 +10,7 @@ export const addCompany = (symbol, units) => (dispatch, getState) => {
         		units
         	}
         };
+        dispatch(addCompanyStart());
     return fetch(`${API_BASE_URL}/stocks/addCompany`, {
         method: 'PUT',
         headers: {
@@ -26,6 +27,11 @@ export const addCompany = (symbol, units) => (dispatch, getState) => {
             dispatch(addCompanyError(err));
         });
 };
+
+export const ADD_COMPANY_START = 'ADD_COMPANY_START';
+export const addCompanyStart = () => ({
+	type:ADD_COMPANY_START
+}) 
 
 export const ADD_COMPANY_SUCCESS = 'ADD_COMPANY_SUCCESS';
 export const addCompanySuccess = (data) => ({
@@ -56,7 +62,6 @@ export const deleteCompany = (symbol) => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => {
-        	console.log(symbol);
         	return dispatch(deleteCompanySuccess(symbol));
         })
         .catch(err => {
@@ -83,6 +88,7 @@ export const updateUnits = (symbol, units) => (dispatch, getState) => {
         	symbol,
         	units      	
         };
+        dispatch(addCompanyStart());
     return fetch(`${API_BASE_URL}/stocks/editUnits`, {
         method: 'PUT',
         headers: {
@@ -94,7 +100,6 @@ export const updateUnits = (symbol, units) => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => {
-        	console.log(symbol);
         	return dispatch(updateUnitsSuccess(symbol, units));
         })
         .catch(err => {
@@ -115,10 +120,40 @@ export const updateUnitsError = (error) => ({
     error
 });
 
-export const SEARCH_COMPANY ='SEARCH_COMPANY';
-export const searchCompany = (name) => ({
-	type: SEARCH_COMPANY,
-	name
+export const searchCompany = (name) => (dispatch, getState) => {
+    const {authToken} = getState().stock;
+    
+    return fetch(`${API_BASE_URL}/stocks/search/${name}`, {
+        method: 'GET',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => { 
+        	return res.json()
+        })
+        .then((data) => {
+        	console.log(data);
+        	return dispatch(searchCompanySuccess(data));
+        })
+        .catch(err => {
+            dispatch(searchCompanyError(err));
+        });
+};
+
+export const SEARCH_COMPANY_SUCCESS ='SEARCH_COMPANY_SUCCESS';
+export const searchCompanySuccess = (options) => ({
+	type: SEARCH_COMPANY_SUCCESS,
+	options
+});
+
+export const SEARCH_COMPANY_ERROR = 'SEARCH_COMPANY_ERROR';
+export const searchCompanyError = (error) => ({
+    type: SEARCH_COMPANY_ERROR,
+    error
 });
 
 export const CLEAR_OPTIONS = 'CLEAR_OPTIONS';
@@ -174,8 +209,6 @@ export const fetchStockInfo = () => (dispatch, getState) => {
     		symbols += ','
     	}
     }
-    console.log("before symbol");
-	console.log(symbols);
     const {authToken} = getState().stock;
     return fetch(`${API_BASE_URL}/stocks/quotes/${symbols}`, {
         method: 'GET',
@@ -187,12 +220,9 @@ export const fetchStockInfo = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => { 
-        	console.log(res);
         	return res.json()
         })
         .then((data) =>{ 
-        	console.log(data);
-        	console.log("calling dispatch");
         	return dispatch(fetchStockInfoSuccess(data))
         })
         .catch(err => {

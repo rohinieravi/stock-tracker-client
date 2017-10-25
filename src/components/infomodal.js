@@ -27,7 +27,7 @@ export class InfoModal extends React.Component {
         return (
             <div className="overlay" id="modal">
                 <div className="content">
-                    <h3>{`Are you sure you want to delete ${this.props.company.name}?`}</h3>
+                    <h3>{`Are you sure you want to delete ${this.props.company.stockInfo.description}?`}</h3>
                     <div>                    
                     <a className="delete" href="" onClick={e => this.onDelete(e)}>Delete</a>
                     <a className="close" href="" onClick={e => this.onClose(e)}>Cancel</a>
