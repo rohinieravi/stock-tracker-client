@@ -5,6 +5,8 @@ import AddCompany from './addCompany';
 import {fetchStockInfo} from '../actions';
 import './app.css';
 import Spinner from 'react-spinkit';
+import {Redirect} from 'react-router-dom';
+
 
 
 export class HomePage extends React.Component {
@@ -34,11 +36,14 @@ export class HomePage extends React.Component {
     }
 
     componentDidMount(){
-    	if(this.props.companies.length === 0){
-	        this.setComment("No companies added.");
-	    }	
-   	    this.props.dispatch(fetchStockInfo());
-
+    	if(this.props.user){ 
+    		if(this.props.user.stocks.length === 0){
+	        	this.setComment("No companies added.");
+	    	}
+	    	else{	
+   	    		this.props.dispatch(fetchStockInfo());
+   			}
+   		}
     }
 
 	setComment(comment){
@@ -52,9 +57,9 @@ export class HomePage extends React.Component {
 	}
 
 	renderCompany() {
-		const companies = this.props.companies.map((company, index) => {
-			if(this.props.stocks.length!==0) {
-			const stockinfo = this.props.stocks.find(stock => stock.symbol === company.symbol);
+		const companies = this.props.user.stocks.map((company, index) => {
+			if(this.props.companies.length!==0) {
+			const stockinfo = this.props.companies.find(stock => stock.symbol === company.symbol);
 			return (
 				<Company key={index} index={index} stockInfo={stockinfo} onDelete={companyName => this.setComment(`Deleted ${companyName}`)}  {...company} />
 			); 
@@ -65,11 +70,11 @@ export class HomePage extends React.Component {
 
 		
 
-		if(this.props.stocks.length === 0) {
+		if(this.props.companies.length === 0) {
 			return (<Spinner name="three-bounce" />);
 		}
 		else{
-			return (<ul className="companies">{companies}</ul>);
+			return (<div className="companies">{companies}</div>);
 		}
 	}
 
@@ -84,12 +89,14 @@ export class HomePage extends React.Component {
 	
 	render() {
 
-
+		if(!this.props.loggedIn) {
+			return (<Redirect to="/" />);
+		}
 		return (
 			<div className="home">
 				<section>
         			<header>
-          				<h3>My Stocks</h3>
+          				<h3>{this.props.user.name}'s Stocks</h3>
         			</header>
         			<div className="comments" ref={div => this.div=div}></div>
         			{this.renderCompany()}
@@ -101,9 +108,11 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    stocks: state.stock.companies,
-    companies: state.stock.currentUser.stocks,
-    isAdding: state.stock.isAdding
+	user: state.stock.currentUser,
+    companies: state.stock.companies,
+    isAdding: state.stock.isAdding,
+    loggedIn: state.stock.currentUser !== null
+
 });
 
 export default connect(mapStateToProps)(HomePage);

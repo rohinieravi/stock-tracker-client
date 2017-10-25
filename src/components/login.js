@@ -37,7 +37,7 @@ export class Login extends React.Component {
             );
         }
 		return (
-			<section>
+			<section className="login">
          		<header>
           			<h3>Login</h3>
         		</header>
@@ -66,8 +66,11 @@ export class Login extends React.Component {
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
-                <div>Demo Login:</div>
-				<div>Username: demo@hi.com, Password: password1234 </div>
+                <div className="demo-login">
+                <div>Demo Login</div>
+				<div>Username: demo@hi.com</div>
+                <div>Password: password1234 </div>
+                </div>
             </form>
         		
       		</section>

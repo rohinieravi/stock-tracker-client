@@ -59,7 +59,7 @@ export class Company extends React.Component {
    
    
   	return (
-  		<li>
+  		<div className="company">
         {this.renderInfoModal()}
   			<header>
           <h4>{this.props.stockInfo.description}</h4>
@@ -71,7 +71,7 @@ export class Company extends React.Component {
         <div>Total Value: {`$${this.props.stockInfo.last*this.props.units}`}</div>
         <button onClick={e => this.setEditing(true)}>Edit</button>
         <button onClick={e => {e.preventDefault(); this.toggleInfoModal(this.props.symbol)}}>Delete</button>
-  		</li>
+  		</div>
   	);
  }
 }
