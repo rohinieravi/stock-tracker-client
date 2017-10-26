@@ -11,15 +11,16 @@ export class Search extends React.Component {
     renderResults() {
 
     	
-        
 	        const results = this.props.options.map((option, index) => 
-	        	<li key={index} onClick={e => this.onClick(e,option)} ><a href="">{Object.values(option)[0].name}</a></li>
+	        	<div key={index} onClick={e => this.onClick(e,option)} ><a href="">{option.description}</a></div>
 	        );
 
 	        return (
-	            <ul className="search-results" ref={ul => this.list = ul}>
+            
+	            <div className="search-results dropdown-content" ref={ul => this.list = ul}>
 	                {results}
-	            </ul>
+	            </div>
+              
 	        );
    		
    		
@@ -28,8 +29,9 @@ export class Search extends React.Component {
     onClick(event, option) {
     	event.preventDefault();
     	this.list.remove();
-    	this.input.value = Object.values(option)[0].name;
-    	this.props.onAdd(Object.keys(option)[0]);
+      this.props.dispatch(clearOptions());
+    	this.input.value = option.description;
+    	this.props.onAdd(option.symbol);
     }
   
     onChange(event) {
@@ -45,10 +47,10 @@ export class Search extends React.Component {
 
     render() {
         return (
-            <div className="search">
+            <div className="search dropdown">
                 
-                <form>
-                    <input type="search" placeholder="Search Company" ref={input => this.input = input} onChange={e => this.onChange(e)} />
+                <form autoComplete="off">
+                    <input type="search" id="search" placeholder="Search Company" ref={input => this.input = input} onChange={e => this.onChange(e)} />
                 </form>
                 
                 {this.renderResults()}

@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "react-spinkit": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -14,10 +15,12 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "jwt-decode": "^2.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
+    "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.74.2"
   }
 }

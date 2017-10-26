@@ -1,18 +1,19 @@
 import React from 'react';
 import './app.css';
-import {Link} from 'react-router-dom';
 import {changeInfoModal} from '../actions';
 import InfoModal from './infomodal';
 import {connect} from 'react-redux';
+import EditUnits from './editUnits';
+
 
 
 export class Company extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      symbol:''
+      symbol:'',
+      isEditing:false,
     }
   }
 
@@ -25,9 +26,12 @@ export class Company extends React.Component {
 
     onDelete(){
       if(this.props.onDelete) {
-        this.props.onDelete(this.props.name);
+        this.props.onDelete(this.props.stockInfo.description);
       }
     }
+
+   
+
 
     renderInfoModal() { 
         if (this.props.showInfoModal && this.props.symbol === this.state.symbol) {
@@ -36,23 +40,43 @@ export class Company extends React.Component {
         return null;
     }
 
+    setEditing(isEditing) {
+      this.setState({
+        isEditing
+      });
+    }
+
+    renderUnits() {
+      if(this.state.isEditing) {
+      return (<EditUnits symbol={this.props.symbol} onCancel={() =>this.setEditing(false)} />);
+      }
+      else {
+        return (<div>Number of Units: {this.props.units}</div>);
+      }
+    }
+
   render() {
+   if(!this.props.stockInfo)  return null;
+   
+   
+   
+   
   	return (
-  		<li>
+  		<div className='company' >
         {this.renderInfoModal()}
   			<header>
-          <h4>{this.props.name}</h4>
+          <h4>{this.props.stockInfo.description}</h4>
         </header>
         <div>Symbol: {this.props.symbol}</div>
-        <div>Current price: {`$${this.props.price}`}</div>
-        <div>Growth/Decline: {this.props.change}</div>
-        <div>Number of Units: {this.props.units}</div>
-        <div>Total Value: {`$${this.props.price*this.props.units}`}</div>
-        <button><Link to={`/editUnits/${this.props.symbol}`}>Edit</Link></button>
+        <div>Current price: {`$${this.props.stockInfo.last}`}</div>
+        <div>Growth/Decline: {this.props.stockInfo.change}</div>
+        {this.renderUnits()}
+        <div>Total Value: {`$${this.props.stockInfo.last*this.props.units}`}</div>
+        <button onClick={e => this.setEditing(true)}>Edit</button>
         <button onClick={e => {e.preventDefault(); this.toggleInfoModal(this.props.symbol)}}>Delete</button>
-  		</li>
+  		</div>
   	);
-  }
+ }
 }
 
 const mapStateToProps = (state, props) => ({

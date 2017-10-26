@@ -3,7 +3,6 @@ import './app.css';
 import Units from './units';
 import {connect} from 'react-redux';
 import {updateUnits} from '../actions';
-import {Link} from 'react-router-dom';
 
 
 export class EditUnits extends React.Component {
@@ -11,28 +10,27 @@ export class EditUnits extends React.Component {
 	onSubmit(e, symbol) {
 		e.preventDefault();
 		this.props.dispatch(updateUnits(symbol, this.noOfUnits.value));
-		this.props.history.push('/userhome');
+		//this.props.history.push('/userhome');
+		this.props.onCancel();
+	}
+
+	onCancel(){
+		this.props.onCancel();
 	}
 
 	render() {
 	
-	const company = this.props.companies.filter(company => Object.keys(company)[0] === this.props.match.params.symbol)[0];
-	const symbol = Object.keys(company)[0];
-	
-		
+	const company = this.props.companies.filter(company => company.symbol === this.props.symbol)[0];
+	const units = this.props.currentUser.stocks.filter(company => company.symbol === this.props.symbol)[0].units;	
 	return (
 			<div className="editUnits">
-				<section>
-         			<header>
-          				<h3>Edit Stock Units</h3>
-        			</header>
-        			<form onSubmit={e=>this.onSubmit(e, symbol)}>
-	        			<div>{company[symbol].name}</div>
-						<Units quantity={company[symbol].units} onAdd={input => this.noOfUnits = input} />
+				
+        			<form onSubmit={e=>this.onSubmit(e, company.symbol)}>
+						<Units quantity={units} onAdd={input => this.noOfUnits = input} />
 						<button>Save</button>
-						<button><Link to="/userhome">Cancel</Link></button>	
+						<button onClick={e=>this.onCancel()}>Cancel</button>	
 					</form>	
-				</section>		
+					
 			</div>
 		);
 	}	

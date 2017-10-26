@@ -1,44 +1,106 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import Company from './company';
+import AddCompany from './addCompany';
+import {fetchStockInfo} from '../actions';
 import './app.css';
+import {Redirect} from 'react-router-dom';
 
 
 
 export class HomePage extends React.Component {
 
+	constructor(props) {
+		super(props);
+		this.state = {
+      		isAddMode:false,
+      		isLoading:false
+    	}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(!nextProps.isAdding && this.props.isAdding){
+		this.setLoading(false);
+	    	this.props.dispatch(fetchStockInfo());
+	    }
+	    else {
+	    	this.setLoading(true);
+	    }
+    }
+    
+    setLoading(isLoading) {
+    	this.setState({
+	    	isLoading
+	    });
+    }
+
+    componentDidMount(){
+    	if(this.props.user){ 
+    		if(this.props.user.stocks.length === 0){
+	        	this.setComment("No companies added.");
+	    	}
+	    	else{	
+   	    		this.props.dispatch(fetchStockInfo());
+   			}
+   		}
+    }
+
 	setComment(comment){
 		this.div.innerHTML = comment;
+	}
+
+	setAddMode(isAddMode) {
+		this.setState({
+			isAddMode
+		});
+	}
+
+	onDelete(companyName){
+		this.setComment(`Deleted ${companyName}`);
+	}
+
+	renderCompany() {
+		const companies = this.props.user.stocks.map((company, index) => {
+			if(this.props.companies.length!==0) {
+			const stockinfo = this.props.companies.find(stock => stock.symbol === company.symbol);
+			return (
+				<Company key={index} index={index} stockInfo={stockinfo} onDelete={companyName => this.onDelete(companyName)}  {...company} />
+			); 
+			}
+			return null;
+		}
+		);
+
+		
+
+		
+			return (<div className="companies">{companies}</div>);
+		
+	}
+
+	renderAddCompany(){
+		if(this.state.isAddMode) {
+			return (<AddCompany onCancel={() => this.setAddMode(false)}/>);
+		}
+		else {
+			return (<button onClick={e=>this.setAddMode(true)}>Add</button>)
+		}
 	}
 	
 	render() {
 
-
-		const companies = this.props.companies.map((company, index) => {
-			const symbol = Object.keys(company)[0];
-			return (
-				<Company key={index} index={index} symbol={symbol} onDelete={companyName => this.setComment(`Deleted ${companyName}`)}  {...company[symbol]} />
-			); 
-
+		if(!this.props.loggedIn) {
+			return (<Redirect to="/" />);
 		}
-		);
-		if(companies.length === 0) {
-			this.setComment("No companies added.");
-		}
-		
-
 		return (
 			<div className="home">
 				<section>
         			<header>
-          				<h3>My Stocks</h3>
+          				<h3>{this.props.user.name}'s Stocks</h3>
         			</header>
         			<div className="comments" ref={div => this.div=div}></div>
-        			<ul>
-        			{companies}
-        			</ul>
-        			<button><Link to="/addCompany"> Add </Link></button>
+        			{this.renderCompany()}
+        			{this.renderAddCompany()}
         		</section>
 			</div>
 		);
@@ -46,7 +108,11 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = state => ({
+	user: state.stock.currentUser,
     companies: state.stock.companies,
+    isAdding: state.stock.isAdding,
+    loggedIn: state.stock.currentUser !== null
+
 });
 
 export default connect(mapStateToProps)(HomePage);
