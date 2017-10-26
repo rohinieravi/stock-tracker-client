@@ -49,7 +49,7 @@ export class Search extends React.Component {
         return (
             <div className="search dropdown">
                 
-                <form>
+                <form autoComplete="off">
                     <input type="search" id="search" placeholder="Search Company" ref={input => this.input = input} onChange={e => this.onChange(e)} />
                 </form>
                 

@@ -11,10 +11,9 @@ export class Company extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       symbol:'',
-      isEditing:false
+      isEditing:false,
     }
   }
 
@@ -30,6 +29,9 @@ export class Company extends React.Component {
         this.props.onDelete(this.props.stockInfo.description);
       }
     }
+
+   
+
 
     renderInfoModal() { 
         if (this.props.showInfoModal && this.props.symbol === this.state.symbol) {
@@ -58,8 +60,9 @@ export class Company extends React.Component {
    
    
    
+   
   	return (
-  		<div className="company">
+  		<div className='company' >
         {this.renderInfoModal()}
   			<header>
           <h4>{this.props.stockInfo.description}</h4>

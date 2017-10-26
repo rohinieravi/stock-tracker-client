@@ -4,7 +4,6 @@ import Company from './company';
 import AddCompany from './addCompany';
 import {fetchStockInfo} from '../actions';
 import './app.css';
-import Spinner from 'react-spinkit';
 import {Redirect} from 'react-router-dom';
 
 
@@ -56,12 +55,16 @@ export class HomePage extends React.Component {
 		});
 	}
 
+	onDelete(companyName){
+		this.setComment(`Deleted ${companyName}`);
+	}
+
 	renderCompany() {
 		const companies = this.props.user.stocks.map((company, index) => {
 			if(this.props.companies.length!==0) {
 			const stockinfo = this.props.companies.find(stock => stock.symbol === company.symbol);
 			return (
-				<Company key={index} index={index} stockInfo={stockinfo} onDelete={companyName => this.setComment(`Deleted ${companyName}`)}  {...company} />
+				<Company key={index} index={index} stockInfo={stockinfo} onDelete={companyName => this.onDelete(companyName)}  {...company} />
 			); 
 			}
 			return null;
@@ -70,12 +73,9 @@ export class HomePage extends React.Component {
 
 		
 
-		if(this.props.companies.length === 0) {
-			return (<Spinner name="three-bounce" />);
-		}
-		else{
+		
 			return (<div className="companies">{companies}</div>);
-		}
+		
 	}
 
 	renderAddCompany(){

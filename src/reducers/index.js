@@ -82,10 +82,19 @@ export const stockReducer = (state=initialState, action) => {
 	}*/
 	else if(action.type === actions.SEARCH_COMPANY_SUCCESS) {
 
-		const options = action.options.securities.security;
+		let options = action.options.securities.security;
+		if(!Array.isArray(options)) {
+			options=[options];
+		}
+			state.currentUser.stocks.forEach(stock => {
+				options = options.filter(option => {
+					return option.symbol !== stock.symbol
+				})
+			})
+		
 
 		return Object.assign({}, state, {
-			options: Array.isArray(options)?options:[options]
+			options
 		});
 	}
 	else if(action.type === actions.SEARCH_COMPANY_ERROR) {

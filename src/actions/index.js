@@ -136,7 +136,6 @@ export const searchCompany = (name) => (dispatch, getState) => {
         	return res.json()
         })
         .then((data) => {
-        	console.log(data);
         	return dispatch(searchCompanySuccess(data));
         })
         .catch(err => {
