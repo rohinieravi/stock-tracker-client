@@ -39,33 +39,42 @@ export class Login extends React.Component {
 		return (
 			<section className="login">
          		<header>
-          			<h3>Login</h3>
+          			<h3>Login to your Account</h3>
         		</header>
         		<form
                 className="login-form"
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
+                                <div className="row">
+
                 {error}
-                <label htmlFor="username">Username</label>
+                </div>
+
+
                 <Field
                     component={Input}
                     type="text"
                     name="username"
                     id="username"
+                    label="Username"
                     validate={[required, nonEmpty, email]}
                 />
-                <label htmlFor="password">Password</label>
+
+
                 <Field
                     component={Input}
                     type="password"
                     name="password"
                     id="password"
+                    label="Password"
                     validate={[required, nonEmpty]}
                 />
+                                <div className="row">
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
+                </div>
                 <div className="demo-login">
                 <div>Demo Login</div>
 				<div>Username: demo@hi.com</div>

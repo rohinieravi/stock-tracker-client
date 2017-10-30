@@ -5,6 +5,9 @@ import AddCompany from './addCompany';
 import {fetchStockInfo} from '../actions';
 import './app.css';
 import {Redirect} from 'react-router-dom';
+import FlipMove from 'react-flip-move';
+import './float-grid.css';
+
 
 
 
@@ -14,49 +17,56 @@ export class HomePage extends React.Component {
 		super(props);
 		this.state = {
       		isAddMode:false,
-      		isLoading:false
+      		isLoading:false,
+      		comment:''
     	}
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if(!nextProps.isAdding && this.props.isAdding){
-		this.setLoading(false);
+			this.setComment("");
 	    	this.props.dispatch(fetchStockInfo());
 	    }
-	    else {
-	    	this.setLoading(true);
+	    if(nextProps.user){ 
+    		if(nextProps.user.stocks.length === 0){
+	        	this.setComment("No companies added. Click on the '+' sign to add a company");
+	    	}
 	    }
     }
     
-    setLoading(isLoading) {
-    	this.setState({
-	    	isLoading
-	    });
-    }
-
+    
     componentDidMount(){
     	if(this.props.user){ 
     		if(this.props.user.stocks.length === 0){
-	        	this.setComment("No companies added.");
+	        	this.setComment("No companies added. Click on the '+' sign to add a company");
 	    	}
 	    	else{	
+	    		this.setComment("");
    	    		this.props.dispatch(fetchStockInfo());
    			}
    		}
     }
 
 	setComment(comment){
-		this.div.innerHTML = comment;
+		this.setState({
+			comment
+		});
 	}
 
 	setAddMode(isAddMode) {
+		this.setComment("");
 		this.setState({
 			isAddMode
 		});
 	}
 
 	onDelete(companyName){
-		this.setComment(`Deleted ${companyName}`);
+		//this.setComment(`Deleted ${companyName}`);
+		if(this.props.user){ 
+    		if(this.props.user.stocks.length === 0){
+	        	this.setComment("No companies added. Click on the '+' sign to add a company");
+	    	}
+	    }
 	}
 
 	renderCompany() {
@@ -69,12 +79,12 @@ export class HomePage extends React.Component {
 			}
 			return null;
 		}
+
 		);
 
-		
+		return companies;
 
 		
-			return (<div className="companies">{companies}</div>);
 		
 	}
 
@@ -83,7 +93,7 @@ export class HomePage extends React.Component {
 			return (<AddCompany onCancel={() => this.setAddMode(false)}/>);
 		}
 		else {
-			return (<button onClick={e=>this.setAddMode(true)}>Add</button>)
+			return (<button id="addButton" onClick={e=>this.setAddMode(true)}>+</button>)
 		}
 	}
 	
@@ -98,8 +108,10 @@ export class HomePage extends React.Component {
         			<header>
           				<h3>{this.props.user.name}'s Stocks</h3>
         			</header>
-        			<div className="comments" ref={div => this.div=div}></div>
+        			<div className="comments">{this.state.comment}</div>
+        			 <FlipMove duration={500} easing="ease-in-out">
         			{this.renderCompany()}
+        			</FlipMove>
         			{this.renderAddCompany()}
         		</section>
 			</div>

@@ -4,19 +4,20 @@
 	color: #fff;
 	background: rgba(0, 0, 0, 0.7);
 	position: absolute;
-	
+	left: 0;
+	margin: 0;
+	z-index: 1000;
 }
 
 .content {
-	color: #fff;
-	background: rgba(0, 0, 0, 0.7);
+	color: black;
+	background: white;
 	position: relative;
-	height: auto;
-	width: 600px;
+	width: 75%;
 	border-radius: 3px;
 	top: 15%;
 	margin: auto auto;
-	border: 1px solid rgba(0,0,0,0.1);
+	border: 2px solid lightblue;
 }
 
 .content h3 {
@@ -26,7 +27,7 @@
 	font-size: 1.15em;
 	font-weight: 300;
 	opacity: 0.8;
-	background: rgba(0,0,0,0.1);
+	background: white;
 	border-radius: 3px 3px 0 0;
 }
 
@@ -63,8 +64,8 @@
 
 .content > div a {
 	font-size: 0.8em;
-	background: #1F253D;
-	color: #95a5a6;
+	background: lightblue;
+	color: black;
 	padding: 0.5em 2em;
 	margin-bottom: 50px;
 	margin-right: 10px;
