@@ -194,7 +194,7 @@ input {
 
 }
 
-#addButton {
+.addButton {
   padding: 0;
   width:40px;
   font-size: 30px;
