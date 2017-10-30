@@ -86,11 +86,11 @@ export const stockReducer = (state=initialState, action) => {
 		if(!Array.isArray(options)) {
 			options=[options];
 		}
-			state.currentUser.stocks.forEach(stock => {
+			/*state.currentUser.stocks.forEach(stock => {
 				options = options.filter(option => {
 					return option.symbol !== stock.symbol
 				})
-			})
+			})*/
 		
 
 		return Object.assign({}, state, {
