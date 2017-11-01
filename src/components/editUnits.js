@@ -20,12 +20,12 @@ export class EditUnits extends React.Component {
 
 	render() {
 	
-	const company = this.props.companies.filter(company => company.symbol === this.props.symbol)[0];
+	//const company = this.props.companies.filter(company => company.symbol === this.props.symbol)[0];
 	const units = this.props.currentUser.stocks.filter(company => company.symbol === this.props.symbol)[0].units;	
 	return (
 			<div className="editUnits">
 				
-        			<form onSubmit={e=>this.onSubmit(e, company.symbol)}>
+        			<form onSubmit={e=>this.onSubmit(e, this.props.symbol)}>
 						<Units quantity={units} onAdd={input => this.noOfUnits = input} />
 						<button>Save</button>
 						<button onClick={e=>this.onCancel()}>Cancel</button>	

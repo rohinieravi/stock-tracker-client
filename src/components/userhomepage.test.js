@@ -9,7 +9,16 @@ describe('<HomePage />', () => {
 	});
 
 	it('Renders the add button initially', () => {
-        const wrapper = shallow(<HomePage />);
-        expect(wrapper.hasClass('addButton')).toEqual(true);
+		const newUser = {
+        	username: "username@email.com", 
+        	password: "password1234", 
+        	user: {
+        		firstName: "fname", 
+        		lastName: "lname"
+        	},
+        	stocks:[]
+        };
+        const wrapper = shallow(<HomePage loggedIn='true' user={newUser}/>);
+        expect(wrapper.find('button').hasClass('addButton')).toEqual(true);
     });
 });
