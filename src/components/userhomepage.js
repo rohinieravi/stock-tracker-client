@@ -93,7 +93,7 @@ export class HomePage extends React.Component {
 			return (<AddCompany onCancel={() => this.setAddMode(false)}/>);
 		}
 		else {
-			return (<button id="addButton" onClick={e=>this.setAddMode(true)}>+</button>)
+			return (<button className="addButton" onClick={e=>this.setAddMode(true)}>+</button>)
 		}
 	}
 	
