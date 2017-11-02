@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-
+import {deleteCompany, changeInfoModal} from '../actions';
 import {InfoModal} from './infomodal';
 
 
@@ -17,8 +17,6 @@ describe('<InfoModal />', () => {
 				
 			}
 		}
-
-
 		wrapper = mount(
 				<InfoModal dispatch={dispatch} onClose={onClose} onDelete={onDelete} company={company}/>
 		);
@@ -30,8 +28,8 @@ describe('<InfoModal />', () => {
 
 	
 	it('Should dispatch action when delete is clicked', () => {
-		wrapper.find('.delete').simulate('click');
-        expect(dispatch).toHaveBeenCalled();
+			wrapper.find('.delete').simulate('click');
+        	expect(dispatch).toHaveBeenCalled();
     });
 
     it('Should invoke onClose when cancel is clicked', () => {

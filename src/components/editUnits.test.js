@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-
+import {updateUnits} from '../actions';
 import {EditUnits} from './editUnits';
 
 
@@ -35,8 +35,8 @@ describe('<EditUnits />', () => {
 	});
 
 	it('Should dispatch action when form is submitted', () => {
-		wrapper.find('form').simulate('submit');
-        expect(dispatch).toHaveBeenCalled();
+			wrapper.find('form').simulate('submit');
+    	   	expect(dispatch).toHaveBeenCalled();
     });
 
     it('Should invoke onCancel when cancel is clicked', () => {

@@ -127,7 +127,8 @@ export const stockReducer = (state=initialState, action) => {
         return Object.assign({}, state, {
             authToken: action.authToken
         });
-    } else if (action.type === SET_CURRENT_USER) {
+    } 
+    else if (action.type === SET_CURRENT_USER) {
         return Object.assign({}, state, {
             currentUser: action.currentUser
         });

@@ -6,7 +6,7 @@ import {changeInfoModal} from '../actions';
 import InfoModal from './infomodal';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
+import {Provider } from 'react-redux';
 import {stockReducer} from '../reducers';
 
 
@@ -68,6 +68,7 @@ describe('<Company />', () => {
     	showInfoModal=true;
     	wrapper=buildWrapperWithStore();
     	wrapper.find('button').last().simulate('click');
+    	expect(wrapper.find('InfoModal')).toHaveLength(1);
 
     })
 

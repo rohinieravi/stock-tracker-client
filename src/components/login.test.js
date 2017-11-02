@@ -7,9 +7,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import {stockReducer} from '../reducers';
 import { MemoryRouter } from 'react-router'
-
-
-
+import {login} from '../actions/auth';
 
 describe('<Login />', () => {
 
@@ -23,8 +21,7 @@ describe('<Login />', () => {
 		store = createStore(combineReducers({ form: formReducer, stock: stockReducer }),applyMiddleware(thunk))
 		dispatch = jest.fn()
 		error = ''
-	
-			
+		
 		
 		wrapper = mount(
 			<Provider store={store}>
@@ -46,8 +43,8 @@ describe('<Login />', () => {
        	form.find('input[id="username"]').simulate('change', {target: {value: 'demo@hi.com'}});
         form.find('input[id="password"]').simulate('change', {target: {value: 'password1234'}});
        	form.simulate('submit');
-       	expect(dispatch).toHaveBeenCalled();
+       	expect(dispatch).toHaveBeenCalledWith(login);
        
-	});
-	*/
+	});*/
+	
 });
