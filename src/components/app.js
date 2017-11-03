@@ -18,7 +18,6 @@ export default function App(props) {
 					<Route exact path="/userhome" component={HomePage} />
 					<Route exact path="/login" component={Login} />
 				</main>
-				<footer></footer>
 			</div>
 		</Router>
 	);

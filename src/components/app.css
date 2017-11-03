@@ -19,9 +19,13 @@ footer {
   font-size: 16px;
 }
 
+footer p {
+  margin: 10px auto;
+}
 
-
-
+footer a {
+  color:black;
+}
 
 .login {
   background-color: white;
@@ -32,17 +36,16 @@ footer {
 
 a {
   text-decoration: none;
-
 }
 
 nav a {
   color:white;
 }
+
 nav h1{
   background-color: white;
   padding: 2px;
   border-radius: 10px;
-
 }
 
 nav h1 a {
@@ -50,17 +53,13 @@ nav h1 a {
   font-family: 'Syncopate', sans-serif;
   font-weight: bold;
 }
+
 nav h1,h2 {
   display: inline;
   margin:0;
   font-size: 14px;
 
 }
-
-
-
-
-
 
 .landing section {
   min-height: 200px;
@@ -71,11 +70,8 @@ nav h1,h2 {
 
 .landing section:nth-child(1) {
   background-color: lightblue;
-    margin-top: 50px;
-
+  margin-top: 50px;
 }
-
-
 
 p {
   margin: 0 auto;
@@ -95,7 +91,6 @@ label, input {
   width:200px;
   max-width: 100%;
   margin:10px auto;
-
 }
  
 .message-error, .form-error {
@@ -120,7 +115,6 @@ label, input {
   border: 1px solid white;
   border-radius: 5px;
   margin:20px 40px;
-
 }
 
 button {
@@ -141,11 +135,6 @@ button {
 
 section:nth-child(1) {
 }
-
-/*.search-results li {
-  background-color: lightgrey;
-  margin:5px 0;
-}*/
 
 #search {
   margin-bottom: 0px;
@@ -186,12 +175,10 @@ section:nth-child(1) {
 input {
     font-size: 14px;
     padding: 6px 10px;
-
 }
 
 .demo-login {
   margin: 40px 0;
-
 }
 
 .addButton {
@@ -223,4 +210,8 @@ input {
 #money {
   width:80px;
   margin-top: 50px;
+}
+
+.demolink a{
+  color: blue;
 }

@@ -1,36 +1,28 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-import {searchCompany, clearOptions} from '../actions';
-
+import {clearOptions} from '../actions';
 import {Search} from './search';
 
-
-
-
 describe('<Search />', () => {
-	let  wrapper, dispatch, onAdd, user, options
+	let  wrapper, dispatch, onAdd, user, options;
 	beforeEach(() => {
-
-		dispatch = jest.fn()
-		onAdd = jest.fn()
+		dispatch = jest.fn();
+		onAdd = jest.fn();
 		user = {
-			stocks: [
-			{
+			stocks: [{
 				symbol: 'AMZN',
 				units:1
-			}
-			]
-		}
-		options = [
-		{
+			}]
+		};
+		options = [{
 			symbol:'TSLA',
 			description:'Tesla'
-		}]
+		}];
 		wrapper = mount(
 				<Search dispatch={dispatch} onAdd={onAdd} user={user} options={options}/>
 		);
-		
 	})
+
 	it('Renders without crashing', () => {
 		wrapper;
 	});
@@ -54,12 +46,6 @@ describe('<Search />', () => {
 		wrapper.find('div.search-results').find('div').last().simulate('click');
 		expect(dispatch).toHaveBeenCalledWith(clearOptions());
 		expect(wrapper.find('input[type="search"]').instance().value).toBe('Tesla');
-
 	});
 
-
-	
-
-	
-	
 });

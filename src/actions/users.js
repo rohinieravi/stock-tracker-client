@@ -2,6 +2,7 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+//async action that registers a new user
 export const registerUser = user => dispatch => {
     return fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
@@ -10,17 +11,17 @@ export const registerUser = user => dispatch => {
         },
         body: JSON.stringify(user)
     })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .catch(err => {
-            const {reason, message, location} = err;
-            if (reason === 'ValidationError') {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-        });
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .catch(err => {
+        const {reason, message, location} = err;
+        if (reason === 'ValidationError') {
+            // Convert ValidationErrors into SubmissionErrors for Redux Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+    });
 };

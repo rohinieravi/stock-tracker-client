@@ -1,16 +1,18 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+//async action that adds a new company stock for the user
 export const addCompany = (symbol, units) => (dispatch, getState) => {
     const {authToken, currentUser} = getState().stock;
     const body = {
-        	username: currentUser.username,
-        	stock: {
-        		symbol,
-        		units
-        	}
-        };
-        dispatch(addCompanyStart());
+        username: currentUser.username,
+        stock: {
+        	symbol,
+        	units
+        }
+    };
+        
+    dispatch(addCompanyStart());
     return fetch(`${API_BASE_URL}/stocks/addCompany`, {
         method: 'PUT',
         headers: {
@@ -20,12 +22,12 @@ export const addCompany = (symbol, units) => (dispatch, getState) => {
         },
         body: JSON.stringify(body)
     })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .then((data) => dispatch(addCompanySuccess(data)))
-        .catch(err => {
-            dispatch(addCompanyError(err));
-        });
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then((data) => dispatch(addCompanySuccess(data)))
+    .catch(err => {
+        dispatch(addCompanyError(err));
+    });
 };
 
 export const ADD_COMPANY_START = 'ADD_COMPANY_START';
@@ -45,12 +47,13 @@ export const addCompanyError = (error) => ({
     error
 });
 
+//async action that removes a company stock from the user's stocks
 export const deleteCompany = (symbol) => (dispatch, getState) => {
     const {authToken, currentUser} = getState().stock;
     const body = {
-        	username: currentUser.username,
-        	symbol        	
-        };
+    	username: currentUser.username,
+    	symbol        	
+    };
     return fetch(`${API_BASE_URL}/stocks/removeCompany`, {
         method: 'PUT',
         headers: {
@@ -60,13 +63,13 @@ export const deleteCompany = (symbol) => (dispatch, getState) => {
         },
         body: JSON.stringify(body)
     })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => {
-        	return dispatch(deleteCompanySuccess(symbol));
-        })
-        .catch(err => {
-            dispatch(deleteCompanyError(err));
-        });
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+        return dispatch(deleteCompanySuccess(symbol));
+    })
+    .catch(err => {
+        dispatch(deleteCompanyError(err));
+    });
 };
 
 export const DELETE_COMPANY_SUCCESS = 'DELETE_COMPANY_SUCCESS';
@@ -81,14 +84,15 @@ export const deleteCompanyError = (error) => ({
     error
 });
 
+// async action that updates the number of units for a particular stock
 export const updateUnits = (symbol, units) => (dispatch, getState) => {
     const {authToken, currentUser} = getState().stock;
     const body = {
-        	username: currentUser.username,
-        	symbol,
-        	units      	
-        };
-        dispatch(addCompanyStart());
+    	username: currentUser.username,
+    	symbol,
+    	units      	
+    };
+    dispatch(addCompanyStart());
     return fetch(`${API_BASE_URL}/stocks/editUnits`, {
         method: 'PUT',
         headers: {
@@ -98,13 +102,13 @@ export const updateUnits = (symbol, units) => (dispatch, getState) => {
         },
         body: JSON.stringify(body)
     })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => {
-        	return dispatch(updateUnitsSuccess(symbol, units));
-        })
-        .catch(err => {
-            dispatch(updateUnitsError(err));
-        });
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+        return dispatch(updateUnitsSuccess(symbol, units));
+    })
+    .catch(err => {
+        dispatch(updateUnitsError(err));
+    });
 };
 
 export const UPDATE_UNITS_SUCCESS = 'UPDATE_UNITS_SUCCESS';
@@ -120,6 +124,7 @@ export const updateUnitsError = (error) => ({
     error
 });
 
+//async action that returns the search results for companies based on keyword passed
 export const searchCompany = (name) => (dispatch, getState) => {
     const {authToken} = getState().stock;
     
@@ -131,16 +136,16 @@ export const searchCompany = (name) => (dispatch, getState) => {
             'Content-Type': 'application/json'
         }
     })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => { 
-        	return res.json()
-        })
-        .then((data) => {
-        	return dispatch(searchCompanySuccess(data));
-        })
-        .catch(err => {
-            dispatch(searchCompanyError(err));
-        });
+    .then(res => normalizeResponseErrors(res))
+    .then(res => { 
+        return res.json()
+    })
+    .then((data) => {
+    	return dispatch(searchCompanySuccess(data));
+    })
+    .catch(err => {
+        dispatch(searchCompanyError(err));
+    });
 };
 
 export const SEARCH_COMPANY_SUCCESS ='SEARCH_COMPANY_SUCCESS';
@@ -165,18 +170,10 @@ export const changeLoginStatus = () => ({
 	type: CHANGE_LOGIN_STATUS
 });
 
-/*export const DELETE_COMPANY = 'DELETE_COMPANY';
-export const deleteCompany = (symbol) => ({
-	type: DELETE_COMPANY,
-	symbol
-});*/
-
 export const CHANGE_INFOMODAL = 'CHANGE_INFOMODAL';
 export const changeInfoModal = () => ({
     type: CHANGE_INFOMODAL
 });
-
-
 
 export const FETCH_STOCKINFO_SUCCESS = 'FETCH_STOCKINFO_SUCCESS';
 export const fetchStockInfoSuccess = (data) => ({
@@ -190,14 +187,7 @@ export const fetchStockInfoError = error => ({
     error
 });
 
-export const fetchquotes = () => (dispatch, getState) => {
-	const {currentUser} = getState().stock;
-	const stocks = currentUser.stocks;
-    for(var i = 0 ; i < stocks.length ; i++){
-    	dispatch(fetchStockInfo(stocks[i]));
-    }
-}
-
+//async action that fetches stock info for a user's stocks
 export const fetchStockInfo = () => (dispatch, getState) => {
 	const {currentUser} = getState().stock;
 	const stocks = currentUser.stocks;
@@ -217,14 +207,14 @@ export const fetchStockInfo = () => (dispatch, getState) => {
            	'Content-Type': 'application/json'
         }
     })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => { 
-        	return res.json()
-        })
-        .then((data) =>{ 
-        	return dispatch(fetchStockInfoSuccess(data))
-        })
-        .catch(err => {
-            dispatch(fetchStockInfoError(err));
-        });
+    .then(res => normalizeResponseErrors(res))
+    .then(res => { 
+    	return res.json()
+    })
+    .then((data) =>{ 
+        return dispatch(fetchStockInfoSuccess(data))
+    })
+    .catch(err => {
+        dispatch(fetchStockInfoError(err));
+    });
 };

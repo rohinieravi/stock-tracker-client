@@ -3,29 +3,23 @@ import {shallow, mount} from 'enzyme';
 import {updateUnits} from '../actions';
 import {EditUnits} from './editUnits';
 
-
-
-
 describe('<EditUnits />', () => {
-	let  wrapper, dispatch, onCancel, symbol, currentUser
+	let  wrapper, dispatch, onCancel, symbol, currentUser;
 	beforeEach(() => {
-
-		dispatch = jest.fn()
-		onCancel = jest.fn()
-		symbol = 'AMZN'
+		dispatch = jest.fn();
+		onCancel = jest.fn();
+		symbol = 'AMZN';
 		currentUser = {
 			stocks: [{
 				symbol:'AMZN',
 				units:'2'
 			}]
-		}
-
-
+		};
 		wrapper = mount(
 				<EditUnits dispatch={dispatch} onCancel={onCancel} symbol={symbol} currentUser={currentUser}/>
 		);
-		
 	})
+
 	it('Renders without crashing', () => {
 		wrapper;
 	});
@@ -43,7 +37,4 @@ describe('<EditUnits />', () => {
     	wrapper.find('button').last().simulate('click');
     	expect(onCancel).toHaveBeenCalled();
     });
-
-	
-	
 });

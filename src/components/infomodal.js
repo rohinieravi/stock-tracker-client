@@ -1,19 +1,19 @@
 import React from 'react';
 import {deleteCompany, changeInfoModal} from '../actions';
 import {connect} from 'react-redux';
-
-
 import './infomodal.css';
 
 export class InfoModal extends React.Component {
+
+    //triggers the infomodal close
     onClose(event) {
         event.preventDefault();
-
         if (this.props.onClose) {
             this.props.onClose();
         }
     }
 
+    //dispatches async action to delete company
     onDelete(event){
         event.preventDefault();
         this.props.dispatch(deleteCompany(this.props.company.symbol));
@@ -33,7 +33,6 @@ export class InfoModal extends React.Component {
                     <a className="close" href="" onClick={e => this.onClose(e)}>Cancel</a>
                     </div>
                  </div>
-                
             </div>
         );
     }
