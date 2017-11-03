@@ -38,30 +38,6 @@
 	font-size: 1.15em;
 }
 
-.content > div p {
-	margin: 0;
-	padding: 10px 0;
-	line-height: 2em;
-	text-align: justify;
-}
-
-.content > div ul {
-	margin-bottom: -30px;
-	padding: 0 0 30px 20px;
-	text-align: left;
-}
-
-.content > div ul li {
-	padding: 5px 0;
-	display: block;	
-	list-style-type: disc;
-	line-height: 1.5em;
-}
-
-.content > div ul li strong{
-	text-decoration: underline;
-}
-
 .content > div a {
 	font-size: 0.8em;
 	background: lightblue;

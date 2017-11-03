@@ -4,14 +4,14 @@ import './app.css';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import './float-grid.css';
-
-
-
+import {Link} from 'react-router-dom';
 
 export function LandingPage(props) {
+
 	if (props.loggedIn) {
         return <Redirect to="/userhome" />;
     }
+
 	return (
 		<div className="landing">
 			<section>
@@ -29,7 +29,6 @@ export function LandingPage(props) {
 	    		<p>Simply sign up for a free account and add in your stock units to your account to track their prices and analyze them. Remove your stock units once you sell them.</p>
 	  			<img id="money" src="images/noun_979139_cc.png"  alt="" />
 	  		</section>
-
 	  		<section>
 	    		<header>
 	      			<h3>Why?</h3>
@@ -45,7 +44,15 @@ export function LandingPage(props) {
 	        	</header>
 		        <p>Go ahead and register below for your free account !</p>
 	  			<SignUpForm />
+	  			<p className="demolink">You can also try our demo account <Link to="/login">here</Link>.</p>
 	  		</section>
+	  		<footer>
+				<p>
+					Built by Rohini Ravindranath  <a href="https://github.com/rohinieravi/stock-tracker-client" target="_blank" rel="noopener noreferrer">
+						<i className="fa fa-github fa-lg" aria-hidden="true"></i>
+					</a>
+				</p>
+			</footer>
       	</div>
 	);
 }

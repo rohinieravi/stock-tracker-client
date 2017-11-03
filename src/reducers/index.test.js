@@ -17,14 +17,12 @@ import {
 } from '../actions';
 import {setAuthToken,setCurrentUser} from '../actions/auth.js';
 
-
-
 describe('stockReducer', () => {
     // Set up some dummy data
     const companies = [{
     		symbol: "ABC",
     		units:10
-    	}]
+    }];
 	const options = {
 		securities:{
 			security:[{
@@ -32,27 +30,25 @@ describe('stockReducer', () => {
 				description:'DEF',
 			}]
 		}
-	}
-	const loggedIn = false
-	const showInfoModal = false
-	const authToken = '1234567890abcdef'
+	};
+	const loggedIn = false;
+	const showInfoModal = false;
+	const authToken = '1234567890abcdef';
     const newUser = {
     	stocks: [{
     		symbol: "ABC",
     		units:10
     	}]}
     const error = "error";
-    const isAdding = false
+    const isAdding = false;
     const data = {
-    		quotes: {
-    			quote:[{
-    				symbol: 'DEF',
-    				price:123
-    			}]
-    		}
-    	
-    }
-
+		quotes: {
+			quote:[{
+				symbol: 'DEF',
+				price:123
+			}]
+    	}
+    };
 
     it('Should set the initial state when nothing is passed in', () => {
         const state = stockReducer(undefined, {type: '__UNKNOWN'});
@@ -84,7 +80,6 @@ describe('stockReducer', () => {
             });
         });
     });
-
 
     describe('addCompanyError', () => {
         it('Should add to error if add company throws error', () => {
