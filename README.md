@@ -16,7 +16,7 @@
 <p>Once you have sold off all units of a particular stock, use the delete option to remove the company from your account.</p>
 
 <h2>API Used</h2>
-<p>The app uses the Stock Tracker API. Documentation for the API can be found <a href="https://github.com/rohinieravi/stock-tracker-api/blob/master/README.md">here</a></p>
+<p>The app uses the Stock Tracker API. Documentation for the API can be found <a href="https://github.com/rohinieravi/stock-tracker-api/blob/master/README.md">here</a>.</p>
 
 <h2>Technology</h2>
 <h3>Front End</h3>
@@ -46,7 +46,7 @@
 
 <h2>Animation</h2>
 <ul>
-  <li><a href="">React Flip Move</a></li>
+  <li><a href="https://github.com/joshwcomeau/react-flip-move">React Flip Move</a></li>
 </ul>
 
 <h2>Graphic Attributions</h2>

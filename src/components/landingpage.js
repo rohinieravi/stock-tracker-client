@@ -26,7 +26,7 @@ export function LandingPage(props) {
 	    		<header>
 	      			<h3>What?</h3>
 	    		</header>
-	    		<p>Simply sign up for a free account and add in your stock units to your account to track their prices and analyze them. Remove your stock units once you sell them.</p>
+	    		<p>Simply sign up for a free account and add in your stock units to your account to track their prices. Update your stock units once you buy or sell them.</p>
 	  			<img id="money" src="images/noun_979139_cc.png"  alt="" />
 	  		</section>
 	  		<section>
@@ -34,7 +34,7 @@ export function LandingPage(props) {
 	      			<h3>Why?</h3>
 	    		</header>
 	    		<p>
-	      			The Stock Tracker helps you watch all your stock units from a single place. This helps you compare the various stock units in hand and make a wise decision on which ones to sell by analyzing the trend of the stock prices.
+	      			The Stock Tracker helps you watch all your stock units from a single place. This helps you compare the various stock units in hand and make a wise decision on which ones to sell by closely watching their stock prices.
 	   			 </p>
 	   			<img id="money" src="images/noun_979139_cc.png"  alt="" />
 	  		</section>
