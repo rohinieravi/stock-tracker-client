@@ -54,6 +54,16 @@ export class Company extends React.Component {
     }
   }
 
+  renderChange() {
+    if(this.props.stockInfo.change>0){
+       return (<div>Change: <span className="green">+{this.props.stockInfo.change}</span></div>)
+    }
+    else{
+        return ( <div>Change: <span className="red">{this.props.stockInfo.change}</span></div>)
+
+    }
+  }
+
   render() {
     if(!this.props.stockInfo)  return null;
    
@@ -65,9 +75,9 @@ export class Company extends React.Component {
         </header>
         <div>Symbol: {this.props.symbol}</div>
         <div>Current price: {`$${this.props.stockInfo.last}`}</div>
-        <div>Growth/Decline: {this.props.stockInfo.change}</div>
+        {this.renderChange()}
         {this.renderUnits()}
-        <div>Total Value: {`$${this.props.stockInfo.last*this.props.units}`}</div>
+        <div>Total Value: {`$${(this.props.stockInfo.last*this.props.units).toFixed(2)}`}</div>
         <button onClick={e => this.setEditing(true)}>Edit</button>
         <button onClick={e => {e.preventDefault(); this.toggleInfoModal(this.props.symbol)}}>Delete</button>
   		</div>
