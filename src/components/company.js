@@ -55,17 +55,20 @@ export class Company extends React.Component {
   }
 
   renderChange() {
-    if(this.props.stockInfo.change>0){
-       return (<div>Change: <span className="green">+{this.props.stockInfo.change.toFixed(2)}</span></div>)
+    const change = this.props.stockInfo.change?this.props.stockInfo.change.toFixed(2):null;
+    if(change && change>0){
+       return (<div>Change: <span className="green">+{change}</span></div>)
     }
     else{
-        return ( <div>Change: <span className="red">{this.props.stockInfo.change.toFixed(2)}</span></div>)
+        return ( <div>Change: <span className="red">{change}</span></div>)
 
     }
   }
 
   render() {
     if(!this.props.stockInfo)  return null;
+    const currentPrice = this.props.stockInfo.last? this.props.stockInfo.last.toFixed(2): null;
+    const totalValue = currentPrice? (this.props.stockInfo.last*this.props.units).toFixed(2): null;
    
   	return (
     <div className="col-6">
@@ -75,10 +78,10 @@ export class Company extends React.Component {
           <h4>{this.props.stockInfo.description}</h4>
         </header>
         <div>Symbol: {this.props.symbol}</div>
-        <div>Current price: {`$${this.props.stockInfo.last.toFixed(2)}`}</div>
+        <div>Current price: {`$${currentPrice}`}</div>
         {this.renderChange()}
         {this.renderUnits()}
-        <div>Total Value: {`$${(this.props.stockInfo.last*this.props.units).toFixed(2)}`}</div>
+        <div>Total Value: {`$${totalValue}`}</div>
         <button onClick={e => this.setEditing(true)}>Edit</button>
         <button onClick={e => {e.preventDefault(); this.toggleInfoModal(this.props.symbol)}}>Delete</button>
   		</div>
