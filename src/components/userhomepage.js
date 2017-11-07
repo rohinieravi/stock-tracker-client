@@ -87,7 +87,7 @@ export class HomePage extends React.Component {
 			return (<AddCompany onCancel={() => this.setAddMode(false)}/>);
 		}
 		else {
-			return (<button className="addButton" onClick={e=>this.setAddMode(true)}>+</button>)
+			return (<div className="col-6"><button className="addButton" onClick={e=>this.setAddMode(true)}>+</button></div>)
 		}
 	}
 	
@@ -97,7 +97,6 @@ export class HomePage extends React.Component {
 		if(!this.props.loggedIn) {
 			return (<Redirect to="/" />);
 		}
-
 		return (
 			<div className="home">
 				<section>
@@ -105,10 +104,13 @@ export class HomePage extends React.Component {
           				<h3>{this.props.user.name}'s Stocks</h3>
         			</header>
         			<div className="comments">{this.state.comment}</div>
-        			<FlipMove duration={500} easing="ease-in-out">
-        				{this.renderCompany()}
-        			</FlipMove>
-        			{this.renderAddCompany()}
+        			<div className="row">
+	        			<FlipMove duration={500} easing="ease-in-out">
+	        				{this.renderCompany()}
+	        			</FlipMove>
+	        			{this.renderAddCompany()}
+        			</div>
+        			
         		</section>
 			</div>
 		);

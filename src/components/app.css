@@ -70,7 +70,6 @@ nav h1,h2 {
 
 .landing section:nth-child(1) {
   background-color: lightblue;
-  margin-top: 50px;
 }
 
 p {
@@ -83,7 +82,7 @@ p + p {
 }
 
 .landing, .icon {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 label, input {
@@ -108,13 +107,13 @@ label, input {
     display: inline-block;
 }
 
-.company {
+.company, .addCompany {
   min-height: 200px;
   padding: 15px 15px;
   background-color: white;
   border: 1px solid white;
   border-radius: 5px;
-  margin:20px 40px;
+  margin:20px 20px;
 }
 
 button {
@@ -140,13 +139,13 @@ section:nth-child(1) {
   margin-bottom: 0px;
 }
 
-.addCompany {
+/*.addCompany {
   padding: 15px 15px;
   background-color: white;
   border: 1px solid white;
   border-radius: 5px;
   margin:20px 40px;
-}
+}*/
 
 .dropdown {
     position: relative;
@@ -189,6 +188,7 @@ input {
   border-radius: 50%;
   background-color: white;
   color:lightblue;
+  margin-top: 20px;
 }
 
 .signup-form {
@@ -223,3 +223,4 @@ input {
 .green {
   color:green;
 }
+
