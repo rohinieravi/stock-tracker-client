@@ -18,9 +18,9 @@ describe('<Company />', () => {
 		dispatch = jest.fn();
 		onDelete = jest.fn();
 		stockInfo = {
-			description:'',
-			last: '',
-			change:''
+			description:'ABC',
+			last: 21.36,
+			change:3.06
 		}
 	})
 

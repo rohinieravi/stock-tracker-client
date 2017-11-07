@@ -23,11 +23,13 @@ export class AddCompany extends React.Component {
 
 	render() {
 		return (
+			<div className="col-6">
 			<div className="addCompany">
 				<Search onAdd={input => this.symbol = input}/>
 				<Units quantity="1" onAdd={input => this.noOfUnits = input} />
 				<button onClick={e => this.addComp(e)}>Add</button>
 				<button onClick={e => this.onCancel(e)}>Cancel</button>	
+			</div>
 			</div>
 		);	
 	}
