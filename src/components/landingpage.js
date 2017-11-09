@@ -18,8 +18,6 @@ export function LandingPage(props) {
 				 <header role="banner">
 		      		<h1>The Stock Tracker</h1>
 		      		<p>Now let's make some money...</p>
-
-		      		<img id="stocks" src="images/noun_398882_cc.png"  alt="" />
 		    	</header>
 	    	</section>
 	    	<section>

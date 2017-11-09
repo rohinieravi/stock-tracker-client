@@ -9,13 +9,18 @@ body {
   background-color: lightblue;
   line-height: 1.5;
   text-align: center;
+  margin:0;
+}
+
+nav {
+  padding-top: 15px;
+  padding-bottom: 30px;
+  background-size: cover; 
 }
 
 nav,
 footer {
-  padding: 5px 5px;
-  background-color: lightblue;
-  height:50px;
+   background-color: lightblue;
   font-size: 16px;
 }
 
@@ -58,18 +63,27 @@ nav h1,h2 {
   display: inline;
   margin:0;
   font-size: 14px;
+}
 
+.landing header p {
+  font-style: italic;
 }
 
 .landing section {
   min-height: 200px;
-  padding: 30px 15px;
+  padding: 20px 20px;
   background-color: white;
   text-align: center;
 }
 
 .landing section:nth-child(1) {
+  background-image: linear-gradient(lightblue, rgba(0,0,0,0), transparent),url('~/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: lightblue;
+  height:400px;
+  color: white;
 }
 
 p {
@@ -81,8 +95,8 @@ p + p {
   margin-top: 15px;
 }
 
-.landing, .icon {
-  margin-top: 20px;
+.landing h1 {
+  margin-bottom: 5px;
 }
 
 label, input {
@@ -132,20 +146,9 @@ button {
   padding: 0px;
 }
 
-section:nth-child(1) {
-}
-
 #search {
   margin-bottom: 0px;
 }
-
-/*.addCompany {
-  padding: 15px 15px;
-  background-color: white;
-  border: 1px solid white;
-  border-radius: 5px;
-  margin:20px 40px;
-}*/
 
 .dropdown {
     position: relative;
@@ -200,11 +203,6 @@ input {
   margin-right: 5px;
   margin-top: 6px;
   vertical-align: text-bottom;
-}
-
-#stocks {
-  width:100px;
-  margin: 30px auto;
 }
 
 #money {

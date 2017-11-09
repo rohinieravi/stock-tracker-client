@@ -100,16 +100,24 @@
     text-align: left;
   }
 
-  #logo{
+  #logo {
     width:27px;
   }
 
-  .nav2{
+  .nav2 {
     text-align: right;
   }
 
   .addButton {
     margin-top: 150px;
+  }
+
+  .landing h3 {
+    font-size: 28px;
+  }
+
+  .landing h1 {
+    font-size:40px;
   }
 
 }
