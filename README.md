@@ -56,12 +56,6 @@
   <li><a href="https://thenounproject.com/term/money/1280144/"></a>https://thenounproject.com/term/money/1280144/</li>
   <li><a href="https://creativecommons.org/licenses/by/3.0/">https://creativecommons.org/licenses/by/3.0/</a></li>
 </ul>
-<h4>"Down Finance"</h4>
-<ul>
-  <li><a href="https://thenounproject.com/iconisland">Icon Island</a></li>
-  <li><a href="https://thenounproject.com/term/down-finance/398875/">https://thenounproject.com/term/down-finance/398875/</a></li>
-  <li><a href="https://creativecommons.org/licenses/by/3.0/">https://creativecommons.org/licenses/by/3.0/</a></li>
-</ul>
 <h4>"Flying Money"</h4>
 <ul>
   <li><a href="https://thenounproject.com/hansmosl/">Hans Paul Mösl Junior</a></li>
