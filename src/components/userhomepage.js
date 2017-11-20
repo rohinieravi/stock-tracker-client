@@ -89,8 +89,10 @@ export class HomePage extends React.Component {
 		else {
 			return (
 				<div className="col-6">
-					<button className="addButton" onClick={e=>this.setAddMode(true)}>+</button>
-					</div>
+					<button className="addButton" onClick={e=>this.setAddMode(true)}>
+						<div className="plus">+</div>
+					</button>
+				</div>
 			);
 		}
 	}
